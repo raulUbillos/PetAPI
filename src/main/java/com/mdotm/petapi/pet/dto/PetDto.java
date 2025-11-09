@@ -16,7 +16,7 @@ public class PetDto {
     @NotBlank()
     private String name;
     
-    @Pattern(regexp = "DOG|CAT|RABIT")
+    @Pattern(regexp = "DOG|CAT|RABBIT")
     @NotBlank()
     private String species;
     

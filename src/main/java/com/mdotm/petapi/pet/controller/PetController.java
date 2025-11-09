@@ -19,13 +19,11 @@ public class PetController {
     }
 
     @PostMapping()
-    @Valid()
-    public PetDto createPet(@RequestBody PetDto pet) {
+    public PetDto createPet(@Valid @RequestBody PetDto pet) {
         return petService.createPet(pet);
     }
 
     @PatchMapping("/{id}")
-    @Valid()
     public PetDto updatePet(@RequestBody PetUpdateDto updateDto, @PathVariable Long id) {
         PetDto petDto = petService.updatePet(updateDto, id);
         return petDto;
