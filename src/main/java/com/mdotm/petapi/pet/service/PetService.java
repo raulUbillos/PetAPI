@@ -49,7 +49,6 @@ public class PetService {
     public List<PetDto> getPets(PetFiltersDto petFiltersDto) {
         logger.info("Trying to get pets");
         logger.info("PetFiltersDto: " + petFiltersDto);
-        System.out.println(petFiltersDto.getName());
         List<Pet> pets = petRepository.findByFilters(petFiltersDto);
         return PetMapper.mapper.PettoPetDto(pets);
     }

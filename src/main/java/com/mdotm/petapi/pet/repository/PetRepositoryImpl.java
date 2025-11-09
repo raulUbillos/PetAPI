@@ -22,7 +22,11 @@ public class PetRepositoryImpl implements PetRepositoryDao {
         if(petFiltersDto == null) {
             return petRepository.findAll();
         }
-        return petRepository.findByFilters(petFiltersDto.getName(), Species.valueOf(petFiltersDto.getSpecies()), petFiltersDto.getAge(), petFiltersDto.getOwnerName());
+        Species species = null;
+        if(petFiltersDto.getSpecies() != null && !petFiltersDto.getSpecies().isEmpty()) {
+            species = Species.valueOf(petFiltersDto.getSpecies());
+        }
+        return petRepository.findByFilters(petFiltersDto.getName(), species, petFiltersDto.getAge(), petFiltersDto.getOwnerName());
     }
 
     @Override
