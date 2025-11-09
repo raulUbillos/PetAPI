@@ -7,9 +7,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./pets.mv.db:/app/pets.mv.db
+      - ./data:/app/data
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:file:/app/pets
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:/app/data/pets
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_DATASOURCE_USERNAME=app
