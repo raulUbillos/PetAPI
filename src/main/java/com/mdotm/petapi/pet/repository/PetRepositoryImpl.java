@@ -3,22 +3,17 @@ package com.mdotm.petapi.pet.repository;
 import com.mdotm.petapi.pet.common.enums.Species;
 import com.mdotm.petapi.pet.dto.PetFiltersDto;
 import com.mdotm.petapi.pet.model.Pet;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class PetRepositoryImpl implements PetRepositoryDao {
-    PetRepository petRepository;
+    private final PetRepository petRepository;
 
-    public PetRepositoryImpl(PetRepository petRepository) {
+    public PetRepositoryImpl(@Lazy PetRepository petRepository) {
         this.petRepository = petRepository;
     }
 

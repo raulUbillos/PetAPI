@@ -57,4 +57,8 @@ public class Pet {
         this.ownerName = ownerName;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Pet: Name: %s, Species: %s, Age: %s, Owner: %s", name, species, age, ownerName);
+    }
 }

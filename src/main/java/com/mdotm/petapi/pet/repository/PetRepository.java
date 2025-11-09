@@ -12,8 +12,7 @@ import java.util.List;
 
 
 public interface PetRepository extends JpaRepository<Pet, Long> {
-    // Versión lista
-    @Query("""
+     @Query("""
       select p
       from Pet p
       where (:name is null or lower(p.name) like lower(concat('%', :name, '%')))

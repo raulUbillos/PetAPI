@@ -37,4 +37,9 @@ public class PetFiltersDto {
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Pet filters: Name: %s, Species: %s, Age: %s, Owner: %s", name, species, age, ownerName);
+    }
 }
