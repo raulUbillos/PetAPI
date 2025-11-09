@@ -1,5 +1,6 @@
 package com.mdotm.petapi.pet.repository;
 
+import com.mdotm.petapi.pet.common.enums.Species;
 import com.mdotm.petapi.pet.dto.PetFiltersDto;
 import com.mdotm.petapi.pet.model.Pet;
 import jakarta.persistence.EntityManager;
@@ -11,37 +12,36 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PetRepositoryImpl implements PetRepositoryDao {
-    EntityManager entityManager;
+    PetRepository petRepository;
 
-    public PetRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public PetRepositoryImpl(PetRepository petRepository) {
+        this.petRepository = petRepository;
     }
 
     @Override
     public List<Pet> findByFilters(PetFiltersDto petFiltersDto) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Pet> criteriaQuery = criteriaBuilder.createQuery(Pet.class);
+        if(petFiltersDto == null) {
+            return petRepository.findAll();
+        }
+        return petRepository.findByFilters(petFiltersDto.getName(), Species.valueOf(petFiltersDto.getSpecies()), petFiltersDto.getAge(), petFiltersDto.getOwnerName());
+    }
 
-        Root<Pet> petRoot = criteriaQuery.from(Pet.class);
-        List<Predicate> predicates = new ArrayList<>();
+    @Override
+    public Pet save(Pet pet) {
+        return petRepository.save(pet);
+    }
 
-        if(petFiltersDto.getAge() != null) {
-            predicates.add(criteriaBuilder.equal(petRoot.get("age"), petFiltersDto.getAge()));
-        }
-        if(petFiltersDto.getName() != null) {
-            predicates.add(criteriaBuilder.like(petRoot.get("name"), "%"+petFiltersDto.getName()+"%"));
-        }
-        if(petFiltersDto.getOwnerName() != null) {
-            predicates.add(criteriaBuilder.like(petRoot.get("ownerName"), "%"+petFiltersDto.getOwnerName()+"%"));
-        }
-        if(petFiltersDto.getSpecies() != null) {
-            predicates.add(criteriaBuilder.equal(petRoot.get("species"), petFiltersDto.getSpecies()));
-        }
+    @Override
+    public Optional<Pet> findById(Long id) {
+        return petRepository.findById(id);
+    }
 
-        criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        return entityManager.createQuery(criteriaQuery).getResultList();
+    @Override
+    public void deleteById(Long id) {
+        petRepository.deleteById(id);
     }
 }

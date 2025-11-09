@@ -3,7 +3,7 @@ package com.mdotm.petapi.pet.dto;
 public class PetFiltersDto {
     private String name;
     private String species;
-    private String age;
+    private Integer age;
     private String ownerName;
 
     public String getName() {
@@ -22,11 +22,11 @@ public class PetFiltersDto {
         this.species = species;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

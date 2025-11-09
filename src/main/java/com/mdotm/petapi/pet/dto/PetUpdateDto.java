@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class PetUpdateDto {
     private String name;
-    @Pattern(regexp = "DOG|CAT|RABIT")
+    @Pattern(regexp = "DOG|CAT|RABIT", message = "Valid options are DOG, CAT or RABBIT")
     private String species;
     private Integer age;
     private String ownerName;

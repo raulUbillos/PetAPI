@@ -7,14 +7,15 @@ import com.mdotm.petapi.pet.dto.PetFiltersDto;
 import com.mdotm.petapi.pet.dto.PetUpdateDto;
 import com.mdotm.petapi.pet.model.Pet;
 import com.mdotm.petapi.pet.repository.PetRepository;
+import com.mdotm.petapi.pet.repository.PetRepositoryDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class PetService {
-    private final PetRepository petRepository;
-    public PetService(PetRepository petRepository) {
+    private final PetRepositoryDao petRepository;
+    public PetService(PetRepositoryDao petRepository) {
         this.petRepository = petRepository;
     }
 
