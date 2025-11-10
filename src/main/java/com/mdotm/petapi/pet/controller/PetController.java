@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import org.apache.logging.log4j.Logger;
+import org.springdoc.core.annotations.ParameterObject;
 import org.apache.logging.log4j.LogManager;
 
 @RestController()
@@ -48,7 +49,7 @@ public class PetController {
     }
 
     @GetMapping()
-    public List<PetDto> getPets( PetFiltersDto petFiltersDto) {
+    public List<PetDto> getPets(@ParameterObject PetFiltersDto petFiltersDto) {
         logger.info(String.format("Getting pets with filters %s", petFiltersDto));
         return petService.getPets(petFiltersDto);
     }
